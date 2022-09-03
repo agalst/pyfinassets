@@ -1,2 +1,2 @@
 # pyfinassets
-Package to calculate the net assets value of a portfolio
+Package to calculate the value of a portfolio of financial instruments
