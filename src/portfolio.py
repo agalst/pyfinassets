@@ -8,6 +8,13 @@ class Portfolio:
 
     def __init__(self):
         self.positions = []
+        self.portfolioDate = DateTime.now()
+
+    def __str__(self):
+        result = "DATE         ISIN           QUANTITY   \n"
+        for position in self.positions:
+            result += self.portfolioDate.strftime("%Y-%m-%d") + "   " + position.asset.securityISIN + "   " + str(position.quantity)
+        return result
 
     def addPosition(self, position: Position):
         if not position in self.positions:
