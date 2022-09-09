@@ -1,5 +1,5 @@
 from pendulum import DateTime
-from src.position import Position
+from position import Position
 
 class Portfolio:
     positions: list[Position]
@@ -7,7 +7,7 @@ class Portfolio:
     portfolioCurrencyBase: str
 
     def __init__(self):
-        pass
+        self.positions = []
 
     def addPosition(self, position: Position):
         if not position in self.positions:

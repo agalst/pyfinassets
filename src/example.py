@@ -1,6 +1,6 @@
-from src.portfolio import Portfolio
-from src.position import Position
-from src.assetfactory import FinancialAssetFactory
+from portfolio import Portfolio
+from position import Position
+from assetfactory import FinancialAssetFactory
 
 assetFactory = FinancialAssetFactory()
 

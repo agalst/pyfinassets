@@ -1,6 +1,6 @@
 from pendulum import DateTime
-from src.abstracts.abstractfinancialasset import AbstractFinancialAsset
-from src.financialassetquotation import FinancialAssetQuotation
+from abstracts.abstractfinancialasset import AbstractFinancialAsset
+from financialassetquotation import FinancialAssetQuotation
 
 class Position:
     date: DateTime

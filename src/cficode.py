@@ -1,4 +1,4 @@
-from src.const import cfi_classes, cfi_types
+from const import cfi_classes, cfi_types
 
 class CFICode:
     code: str = ""
