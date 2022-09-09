@@ -9,8 +9,11 @@ class Portfolio:
     def __init__(self):
         pass
 
-    def addPosition(self):
-        pass
+    def addPosition(self, position: Position):
+        if not position in self.positions:
+            self.positions.append(position)
+        else:
+            raise Exception("This positon is already in the portfolio!")
 
     def modifyPosition(self):
         pass
