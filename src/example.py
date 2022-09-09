@@ -12,3 +12,4 @@ myApplePosition = Position(asset=appleSecurity, quantity=10)
 
 myPortfolio.addPosition(myApplePosition)
 print(myPortfolio)
+print(myPortfolio.evaluate())

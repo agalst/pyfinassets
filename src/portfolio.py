@@ -27,3 +27,6 @@ class Portfolio:
 
     def removePosition(self):
         pass
+
+    def evaluate(self):
+        pass
