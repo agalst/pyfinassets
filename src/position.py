@@ -5,6 +5,7 @@ class Position:
     date: DateTime
     security: AbstractFinancialAsset
     quantity: float
+    securityQuotation: FinancialAssetQuotation
     currencyLocal: str
     originalValueLocal: float
     marketValueLocal: float
