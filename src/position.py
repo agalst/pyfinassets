@@ -1,6 +1,8 @@
 from pendulum import DateTime
+
 from abstracts.abstractfinancialasset import AbstractFinancialAsset
 from financialassetquotation import FinancialAssetQuotation
+
 
 class Position:
     date: DateTime
@@ -16,3 +18,6 @@ class Position:
         self.asset = asset
         self.quantity = quantity
         self.date = DateTime.now()
+
+    def evaluate(self):
+        self.marketValueLocal = self.securityQuotation * self.quantity

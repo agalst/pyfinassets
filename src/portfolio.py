@@ -1,10 +1,13 @@
-from pendulum import DateTime
-from position import Position
 from abstractfinancialasset import AbstractFinancialAsset
+from pendulum import DateTime
+
+from position import Position
+
 
 class Portfolio:
     positions: list[Position]
     portfolioDate: DateTime
+    portfolio_valuation = 0.0
     portfolioCurrencyBase: str
 
     def __init__(self):
@@ -14,11 +17,17 @@ class Portfolio:
     def __str__(self):
         result = "DATE         ISIN           QUANTITY   \n"
         for position in self.positions:
-            result += self.portfolioDate.strftime("%Y-%m-%d") + "   " + position.asset.securityISIN + "   " + str(position.quantity)
+            result += (
+                self.portfolioDate.strftime("%Y-%m-%d")
+                + "   "
+                + position.asset.securityISIN
+                + "   "
+                + str(position.quantity)
+            )
         return result
 
     def addPosition(self, position: Position):
-        if not position in self.positions:
+        if position not in self.positions:
             self.positions.append(position)
         else:
             raise Exception("This positon is already in the portfolio!")
@@ -28,9 +37,10 @@ class Portfolio:
 
     def removePosition(self, security: AbstractFinancialAsset) -> None:
         for i, position in enumerate(self.positions):
-            if position.asset==security:
+            if position.asset == security:
                 self.positions.pop(i)
                 return
 
     def evaluate(self):
-        
+        for position in self.positions:
+            self.portfolio_valuation += position.evaluate()
