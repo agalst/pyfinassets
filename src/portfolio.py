@@ -1,5 +1,6 @@
 from pendulum import DateTime
 from position import Position
+from abstractfinancialasset import AbstractFinancialAsset
 
 class Portfolio:
     positions: list[Position]
@@ -25,8 +26,11 @@ class Portfolio:
     def modifyPosition(self):
         pass
 
-    def removePosition(self):
-        pass
+    def removePosition(self, security: AbstractFinancialAsset) -> None:
+        for i, position in enumerate(self.positions):
+            if position.asset==security:
+                self.positions.pop(i)
+                return
 
     def evaluate(self):
-        pass
+        
