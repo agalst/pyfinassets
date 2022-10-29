@@ -2,6 +2,8 @@ from pendulum import DateTime
 
 from abstracts.abstractfinancialasset import AbstractFinancialAsset
 from position import Position
+from quotation import QuotationType
+from yahoodataprovider import YahooDataProvider
 
 
 class Portfolio:
@@ -50,11 +52,9 @@ class Portfolio:
         return self.portfolio_valuation
 
     def update_prices(self):
-        import pandas_datareader as pdr
+        ydr = YahooDataProvider()
 
         for position in self.positions:
-            position.securityQuotation = pdr.get_data_yahoo(
-                position.asset.securitySymbol,
-                start=position.date.strftime("%Y-%m-%d"),
-                end=position.date.strftime("%Y-%m-%d"),
-            )["Close"].values[0]
+            position.securityQuotation = ydr.get_single_quotation(
+                position=position, type=QuotationType.Close
+            )

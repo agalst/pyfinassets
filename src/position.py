@@ -2,14 +2,14 @@ from pendulum import DateTime
 
 from abstracts.abstractfinancialasset import AbstractFinancialAsset
 from exceptions import SecurityQuotationMissingError
-from financialassetquotation import FinancialAssetQuotation
+from quotation import SecurityQuotation
 
 
 class Position:
     date: DateTime
     asset: AbstractFinancialAsset
     quantity: float
-    securityQuotation: FinancialAssetQuotation
+    securityQuotation: SecurityQuotation
     currencyLocal: str
     originalValueLocal: float
     marketValueLocal: float
@@ -33,5 +33,5 @@ class Position:
             raise SecurityQuotationMissingError(
                 f"Quotation for this security is not available on {str_date}"
             )
-        self.marketValueLocal = self.securityQuotation * self.quantity
+        self.marketValueLocal = self.securityQuotation.quotation * self.quantity
         return self.marketValueLocal
