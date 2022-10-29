@@ -1,4 +1,5 @@
 def test_different_dates(mocker):
+    from pandas import DataFrame
     from pendulum import DateTime
 
     from assetfactory import FinancialAssetFactory
@@ -14,6 +15,9 @@ def test_different_dates(mocker):
         mic="XNAS",
         symbol="AAPL",
     )
+    mocker.patch(
+        "pandas_datareader.get_data_yahoo", return_value=DataFrame({"Close": [155.74]})
+    )
 
     myPortfolio = Portfolio()
     myApplePosition = Position(
@@ -25,4 +29,5 @@ def test_different_dates(mocker):
 
     myPortfolio.addPosition(myApplePosition)
     myPortfolio.addPosition(myApplePosition1)
-    assert myPortfolio.evaluate(date=DateTime(2022, 10, 28)) == 1557.4000549316406
+    myPortfolio.update_prices()
+    assert myPortfolio.evaluate(date=DateTime(2022, 10, 28)) == 1557.4

@@ -41,13 +41,17 @@ class Portfolio:
                 self.positions.pop(i)
                 return
 
-    def evaluate(self):
-        for position in self.positions:
+    def evaluate(self, date: DateTime):
+        for position in [x for x in self.positions if x.date == date]:
             self.portfolio_valuation += position.evaluate()
+        return self.portfolio_valuation
 
-    def update_price(self):
+    def update_prices(self):
         import pandas_datareader as pdr
 
         for position in self.positions:
-            data = pdr.get_data_yahoo(position.asset.name)
-            print(data)
+            position.securityQuotation = pdr.get_data_yahoo(
+                position.asset.securitySymbol,
+                start=self.portfolioDate.strftime("%Y-%m-%d"),
+                end=self.portfolioDate.strftime("%Y-%m-%d"),
+            )["Close"].values[0]
