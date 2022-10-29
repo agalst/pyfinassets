@@ -15,14 +15,17 @@ class Portfolio:
         self.portfolioDate = DateTime.now()
 
     def __str__(self):
-        result = "DATE         ISIN           QUANTITY   \n"
+        result = "DATE         ISIN           QUANTITY           QUOTATION\n"
         for position in self.positions:
             result += (
-                self.portfolioDate.strftime("%Y-%m-%d")
+                position.date.strftime("%Y-%m-%d")
                 + "   "
                 + position.asset.securityISIN
                 + "   "
                 + str(position.quantity)
+                + "                 "
+                + str(position.securityQuotation)
+                + "\n"
             )
         return result
 
@@ -52,6 +55,6 @@ class Portfolio:
         for position in self.positions:
             position.securityQuotation = pdr.get_data_yahoo(
                 position.asset.securitySymbol,
-                start=self.portfolioDate.strftime("%Y-%m-%d"),
-                end=self.portfolioDate.strftime("%Y-%m-%d"),
+                start=position.date.strftime("%Y-%m-%d"),
+                end=position.date.strftime("%Y-%m-%d"),
             )["Close"].values[0]

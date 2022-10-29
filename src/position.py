@@ -15,18 +15,23 @@ class Position:
     marketValueLocal: float
     accruedInterest: float
 
-    def __init__(self, asset: AbstractFinancialAsset, quantity):
+    def __init__(
+        self, asset: AbstractFinancialAsset, quantity, date: DateTime = DateTime.now()
+    ):
         self.asset = asset
         self.quantity = quantity
-        self.date = DateTime.now()
+        self.date = date
         self.securityQuotation = None
 
     def __str__(self):
-        return "On " + str(self.date) + f" {self.quantity} units of " + str(self.asset)
+        str_date = self.date.strftime("%Y-%m-%d")
+        return f"On {str_date} {self.quantity} units of " + str(self.asset)
 
     def evaluate(self):
         if not self.securityQuotation:
+            str_date = self.date.strftime("%Y-%m-%d")
             raise SecurityQuotationMissingError(
-                f"Quotation for this security is not available on {self.date}"
+                f"Quotation for this security is not available on {str_date}"
             )
         self.marketValueLocal = self.securityQuotation * self.quantity
+        return self.marketValueLocal
