@@ -1,6 +1,6 @@
-from abstractfinancialasset import AbstractFinancialAsset
 from pendulum import DateTime
 
+from abstracts.abstractfinancialasset import AbstractFinancialAsset
 from position import Position
 
 
@@ -44,3 +44,10 @@ class Portfolio:
     def evaluate(self):
         for position in self.positions:
             self.portfolio_valuation += position.evaluate()
+
+    def update_price(self):
+        import pandas_datareader as pdr
+
+        for position in self.positions:
+            data = pdr.get_data_yahoo(position.asset.name)
+            print(data)
