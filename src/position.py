@@ -19,5 +19,8 @@ class Position:
         self.quantity = quantity
         self.date = DateTime.now()
 
+    def __str__(self):
+        return "On " + str(self.date) + f" {self.quantity} units of " + str(self.asset)
+
     def evaluate(self):
         self.marketValueLocal = self.securityQuotation * self.quantity

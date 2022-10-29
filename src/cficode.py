@@ -1,9 +1,10 @@
 from const import cfi_classes, cfi_types
 
+
 class CFICode:
     code: str = ""
 
-    def __init__(self, code:str):
+    def __init__(self, code: str):
         self.code = code
         self.first_char = self.code[0]
         self.second_char = self.code[1]
@@ -11,6 +12,9 @@ class CFICode:
         self.fourth_char = self.code[3]
         self.fifth_char = self.code[4]
         self.sixth_char = self.code[5]
+
+    def __str__(self):
+        return str(self.code)
 
     def get_asset_class(self):
         return cfi_classes.get(self.first_char)
