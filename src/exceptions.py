@@ -1,0 +1,2 @@
+class SecurityQuotationMissingError(Exception):
+    pass
